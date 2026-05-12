@@ -1,11 +1,1024 @@
 <!DOCTYPE html>
-  <html lang="de">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Webseite</title>
-  </head>
-  <body>
-    <h1>Platzhalter – ersetze diese Datei mit deiner eigenen index.html</h1>
-  </body>
-  </html>
+<!-- saved from url=(0071)file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s3 -->
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDR Storyboard – Technische Hintergründe</title>
+<link href="./HDR Storyboard – Technische Hintergründe_files/css2" rel="stylesheet">
+<style>
+:root {
+  --navy:   #0d1b2e;
+  --blue:   #1a5faa;
+  --sky:    #2e7fd4;
+  --ice:    #daeaf8;
+  --white:  #f5faff;
+  --text:   #1a2436;
+  --muted:  #5577aa;
+  --accent: #ff6b35;
+  --green:  #22aa66;
+  --warn:   #e8a020;
+  --card:   #eef5fd;
+  --border: #b8d4ec;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(30,95,170,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,95,170,0.12) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 20s linear infinite;
+}
+@keyframes gridDrift { from { transform: translateY(0); } to { transform: translateY(60px); } }
+
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,127,212,0.25) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1);} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.12);} }
+
+.hero-badge {
+  display: inline-block;
+  border: 1px solid rgba(46,127,212,0.5);
+  color: var(--sky);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 2rem;
+  position: relative;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  color: #fff;
+  position: relative;
+  animation: fadeUp 0.9s 0.1s ease both;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, var(--sky), #7ec8f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin-top: 1.2rem;
+  max-width: 560px;
+  position: relative;
+  animation: fadeUp 1s 0.2s ease both;
+}
+
+.hero-meta {
+  display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+  margin-top: 2.5rem;
+  animation: fadeUp 1s 0.3s ease both;
+  position: relative;
+}
+.hero-meta span {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+}
+.hero-meta strong { color: rgba(255,255,255,0.8); }
+
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.3); font-size: 0.75rem; letter-spacing: 0.1em;
+  animation: fadeUp 1s 0.6s ease both;
+}
+.scroll-dot {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollAnim 2s ease-in-out infinite;
+}
+@keyframes scrollAnim { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+
+/* ── NAV (sticky) ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,250,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 2rem;
+  display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center;
+}
+.nav a {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+.nav a:hover, .nav a.active {
+  background: var(--blue); color: #fff;
+}
+
+/* ── SECTIONS ── */
+.section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 5rem 2rem;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+.section-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 3.5rem; font-weight: 800;
+  color: var(--sky); opacity: 0.25;
+  line-height: 1; flex-shrink: 0;
+  width: 3.5rem; text-align: center;
+}
+.section-titles h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.65rem; font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.section-titles .sub {
+  color: var(--muted); font-size: 0.88rem;
+  margin-top: 0.3rem; font-style: italic;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+}
+
+/* ── ILLUSTRATION CONTAINERS ── */
+.illo-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+  background: var(--card);
+}
+.illo-caption {
+  font-size: 0.8rem; color: var(--muted);
+  text-align: center; padding: 0.5rem;
+  font-style: italic;
+}
+
+/* ── SPLIT SCREEN ILLUSTRATION ── */
+.split-illo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  height: 220px;
+}
+.split-side {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+}
+.split-label {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  color: #fff; font-family: 'Syne', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+/* SDR side */
+.sdr-sky { background: linear-gradient(to bottom, #8899aa, #667788); flex: 1; position: relative; }
+.sdr-sun {
+  position: absolute; top: 25%; left: 28%;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: #cccc66;
+}
+.sdr-water { height: 45%; background: #445566; }
+.sdr-reflections {
+  position: absolute; bottom: 20%; left: 0; right: 0;
+  display: flex; gap: 12px; padding: 0 10px;
+}
+.sdr-reflections span {
+  height: 6px; background: #99aabb; border-radius: 3px; flex: 1;
+}
+/* HDR side */
+.hdr-sky {
+  flex: 1; position: relative;
+  background: linear-gradient(to top, #ff8800, #cc4400 30%, #441100 70%, #110022);
+}
+.hdr-sun {
+  position: absolute; top: 18%; left: 28%;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: radial-gradient(circle, #fff 30%, #ffee88 60%, transparent 100%);
+  box-shadow: 0 0 30px 10px rgba(255,220,100,0.5);
+}
+.hdr-water { height: 45%; background: linear-gradient(to bottom, #001844, #000c2a); }
+.hdr-reflections {
+  position: absolute; bottom: 20%; left: 0; right: 0;
+  display: flex; gap: 10px; padding: 0 8px;
+}
+.hdr-reflections span {
+  height: 8px; background: #ffaa22; border-radius: 3px; flex: 1;
+  box-shadow: 0 0 8px rgba(255,170,34,0.8);
+}
+.split-divider {
+  position: absolute; top: 0; left: 50%;
+  width: 2px; height: 100%;
+  background: rgba(255,255,255,0.9);
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* ── GREENSCREEN ILLUSTRATION ── */
+.gs-illo {
+  display: flex; align-items: stretch;
+  background: #1a2a4a;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+.gs-screen {
+  position: absolute; inset: 30px 0 40px 0;
+  background: #2d8a2d;
+  display: flex; align-items: center; justify-content: center;
+}
+.gs-label { color: #c8f0c8; font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; }
+.gs-cards {
+  position: absolute; left: 12px; top: 35px; bottom: 45px;
+  display: flex; flex-direction: column; justify-content: space-around;
+  width: 130px; z-index: 2;
+}
+.gs-card-r {
+  position: absolute; right: 12px; top: 35px; bottom: 45px;
+  display: flex; flex-direction: column; justify-content: space-around;
+  width: 130px; z-index: 2;
+}
+.gs-card {
+  background: rgba(26,95,170,0.85);
+  border: 1px solid rgba(46,127,212,0.5);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #fff; font-size: 0.72rem;
+  backdrop-filter: blur(4px);
+}
+.gs-card.r { background: rgba(170,52,0,0.85); border-color: rgba(200,80,0,0.5); }
+.gs-mod {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: 40px; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.gs-head {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #4466bb; border: 2px solid rgba(120,160,255,0.5);
+}
+.gs-body {
+  width: 40px; height: 60px;
+  background: linear-gradient(to bottom, #3355aa, #223388);
+  border-radius: 4px 4px 0 0;
+}
+.gs-cam-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: rgba(13,27,46,0.95);
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem;
+  color: rgba(255,255,255,0.5); font-size: 0.72rem;
+  font-family: 'Syne', sans-serif; letter-spacing: 0.08em;
+}
+.cam-icon {
+  background: rgba(26,95,170,0.7);
+  border: 1px solid rgba(46,127,212,0.5);
+  border-radius: 4px; padding: 2px 10px;
+  color: #fff; font-size: 0.7rem;
+}
+
+/* ── BIT DEPTH ILLUSTRATION ── */
+.bit-illo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  height: 220px; position: relative;
+}
+.bit-panel {
+  display: flex; flex-direction: column;
+  padding: 12px 16px 8px;
+  background: #f8f9ff;
+}
+.bit-panel + .bit-panel { border-left: 1px solid var(--border); }
+.bit-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.82rem; color: var(--navy);
+  text-align: center; margin-bottom: 10px;
+}
+.bit-grad { flex: 1; position: relative; border-radius: 4px; overflow: hidden; }
+.bit8-steps {
+  display: flex; height: 100%; width: 100%;
+}
+.bit8-steps div {
+  flex: 1; position: relative;
+}
+.bit8-steps div::after {
+  content: ''; position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 1px; background: rgba(255,255,255,0.6);
+}
+.bit10-grad {
+  height: 100%; width: 100%;
+  background: linear-gradient(to right,
+    hsl(230,80%,35%),
+    hsl(240,75%,45%),
+    hsl(250,70%,55%),
+    hsl(270,65%,60%),
+    hsl(285,60%,65%));
+  border-radius: 4px;
+}
+.staircase {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.staircase svg { width: 100%; height: 100%; }
+.bit-annot {
+  font-size: 0.72rem; text-align: center; margin-top: 6px;
+  font-weight: 600;
+}
+.bit-annot.bad { color: #cc2200; }
+.bit-annot.good { color: #115500; }
+
+/* ── LOCAL DIMMING ILLUSTRATION ── */
+.led-illo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  height: 220px;
+}
+.led-panel {
+  display: flex; flex-direction: column;
+  padding: 12px 16px 8px;
+  background: #f8f9ff;
+}
+.led-panel + .led-panel { border-left: 1px solid var(--border); }
+.led-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.82rem; color: var(--navy);
+  text-align: center; margin-bottom: 8px;
+}
+.oled-screen {
+  flex: 1; background: #000;
+  border-radius: 6px; overflow: hidden;
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3px; padding: 4px;
+  border: 2px solid #334466;
+}
+.oled-px {
+  border-radius: 3px;
+  background: #0a0a0a;
+  transition: background 0.3s;
+}
+.oled-px.on { background: #ffffff; box-shadow: 0 0 6px rgba(255,255,255,0.8); }
+.miniled-screen {
+  flex: 1; background: #0a0a14;
+  border-radius: 6px; overflow: hidden;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 4px; padding: 4px;
+  border: 2px solid #334466;
+}
+.zone {
+  border-radius: 3px; background: #111122;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem; color: #4488aa;
+  font-family: 'Syne', sans-serif;
+}
+.zone.bright { background: #ffffcc; color: #664400; box-shadow: 0 0 8px rgba(255,255,180,0.6); }
+.zone.mid { background: #445566; color: #aaccdd; }
+.led-annot { font-size: 0.7rem; text-align: center; margin-top: 6px; font-weight: 600; }
+.led-annot.good { color: #115500; }
+.led-annot.bad { color: #cc3300; }
+
+/* ── CONTENT GRID ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media(max-width: 700px) { .content-grid { grid-template-columns: 1fr; } }
+
+/* ── INFO BOX ── */
+.info-box {
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  display: flex; gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.info-box.blue { background: #e8f4ff; border-left: 3px solid var(--blue); }
+.info-box.warn { background: #fff8e8; border-left: 3px solid var(--warn); }
+.info-box .icon {
+  font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem;
+}
+.info-box p { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+
+/* ── KV TABLE ── */
+.kv-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.88rem; margin-bottom: 1.5rem;
+}
+.kv-table tr:nth-child(odd) td:last-child { background: var(--white); }
+.kv-table tr:nth-child(even) td:last-child { background: var(--ice); }
+.kv-table td {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.kv-table td:first-child {
+  background: var(--ice);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 0.82rem;
+  color: var(--navy);
+  width: 38%;
+  white-space: nowrap;
+}
+
+/* ── BODY TEXT ── */
+.body-text {
+  font-size: 0.97rem; line-height: 1.75;
+  color: var(--text); margin-bottom: 1.25rem;
+}
+.body-text strong { color: var(--blue); font-weight: 600; }
+
+.h2 {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 1.1rem; color: var(--blue);
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--ice);
+}
+
+/* ── OVERVIEW CARDS ── */
+.overview {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2rem;
+}
+@media(max-width: 900px) { .overview { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 600px) { .overview { grid-template-columns: 1fr; } }
+.ov-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex; flex-direction: column; gap: 0.4rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.ov-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26,95,170,0.12);
+}
+.ov-num {
+  font-family: 'Syne', sans-serif; font-size: 2rem;
+  font-weight: 800; color: var(--sky); opacity: 0.35;
+  line-height: 1;
+}
+.ov-title {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.92rem; color: var(--navy);
+}
+.ov-sub { font-size: 0.78rem; color: var(--muted); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 2.5rem 2rem;
+  font-size: 0.82rem;
+}
+footer strong { color: rgba(255,255,255,0.7); }
+
+/* ── CANVAS ANIMATIONS ── */
+canvas { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">Aufgabenblatt 2 · Medienproduktion 2 · SS 2026</div>
+  <h1>Technische<br><span>Hintergründe</span></h1>
+  <p class="hero-sub">Die sechs Schaubilder des Storyboards zur Szene <em>„Die Welt der Farben"</em> – erklärt und visualisiert.</p>
+  <div class="hero-meta">
+    <span><strong>Modul</strong> · 11B0033 Audio- und Videotechnik</span>
+    <span><strong>HS Osnabrück</strong> · Medieninformatik</span>
+    <span><strong>Abgabe</strong> · 17.05.2026</span>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#overview" class="">Übersicht</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s1" class="">1 · Halbtotale</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s2" class="active">2 · SDR vs HDR</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s3" class="">3 · Sonnenuntergang</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s4" class="">4 · Bit-Tiefe</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s5" class="">5 · Local Dimming</a>
+  <a href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s6" class="">6 · Outro</a>
+</nav>
+
+<!-- ══ OVERVIEW ══ -->
+<div class="section visible" id="overview">
+  <div class="section-header">
+    <div class="section-num">∑</div>
+    <div class="section-titles">
+      <h2>Inhaltsübersicht</h2>
+      <div class="sub">6 Schaubilder · 6 technische Themen</div>
+    </div>
+  </div>
+  <div class="overview">
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s1">
+      <div class="ov-num">1</div>
+      <div class="ov-title">Halbtotale – Intro</div>
+      <div class="ov-sub">Greenscreen-Keying &amp; virtuelle Einblendungen</div>
+    </a>
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s2">
+      <div class="ov-num">2</div>
+      <div class="ov-title">SDR vs. HDR Farbraum</div>
+      <div class="ov-sub">Rec. 709 vs. Rec. 2020 – Gamut-Vergleich</div>
+    </a>
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s3">
+      <div class="ov-num">3</div>
+      <div class="ov-title">Sonnenuntergang Demo</div>
+      <div class="ov-sub">Dynamikumfang, Nits &amp; Spitzlichter</div>
+    </a>
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s4">
+      <div class="ov-num">4</div>
+      <div class="ov-title">8-Bit vs. 10-Bit</div>
+      <div class="ov-sub">Farbtiefe &amp; Color Banding</div>
+    </a>
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s5">
+      <div class="ov-num">5</div>
+      <div class="ov-title">Local Dimming</div>
+      <div class="ov-sub">OLED vs. Mini-LED Technologie</div>
+    </a>
+    <a class="ov-card" href="file:///C:/Users/Maxi-PC/Downloads/HDR_Technische_Hintergruende.html#s6">
+      <div class="ov-num">6</div>
+      <div class="ov-title">Halbtotale – Outro</div>
+      <div class="ov-sub">Compositing &amp; Überblendung</div>
+    </a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 1 – HALBTOTALE ══ -->
+<div class="section visible" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-titles">
+      <h2>Halbtotale – Greenscreen &amp; virtuelle Einblendungen</h2>
+      <div class="sub">Storyboard-Frames #1 und #6 · Intro &amp; Outro</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="gs-illo">
+      <div class="gs-screen">
+        <span class="gs-label">GREENSCREEN (Chroma-Key)</span>
+      </div>
+      <div class="gs-cards">
+        <div class="gs-card">Rec. 2020 Farbraum ▶</div>
+        <div class="gs-card">Nits-Skala ▶</div>
+        <div class="gs-card">HDR10 / Dolby Vision ▶</div>
+      </div>
+      <div class="gs-card-r">
+        <div class="gs-card r">◀ Format-Vergleich</div>
+        <div class="gs-card r">◀ HDR10+</div>
+        <div class="gs-card r">◀ Dolby Vision</div>
+      </div>
+      <div class="gs-mod">
+        <div class="gs-head"></div>
+        <div class="gs-body"></div>
+      </div>
+      <div class="gs-cam-bar">
+        <div class="cam-icon">KAMERA</div>
+      </div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 1 – Moderator vor Greenscreen; virtuelle Grafiken werden in der Post-Produktion eingeblendet</div>
+
+  <h3 class="h2">Funktionsweise: Chroma-Keying</h3>
+  <p class="body-text">Die Halbtotale zeigt den Moderator zentriert vor einem gleichmäßig ausgeleuchteten Greenscreen. In der Post-Produktion wird der grüne Hintergrund per <strong>Chroma-Keying</strong> entfernt und durch ein virtuelles Studio ersetzt. Erklärende Grafiken wie Farbraumdiagramme oder Nits-Skalen werden digital eingeblendet.</p>
+  <div class="info-box blue">
+    <span class="icon">ℹ</span>
+    <p>Chroma-Keying: Alle Pixel einer Farbrange (Grün: ca. 100–140° Farbton) werden transparent gemacht. Entscheidend ist eine gleichmäßige GS-Ausleuchtung ohne Falten, um Grünstich-Spill auf dem Moderator zu vermeiden.</p>
+  </div>
+  <table class="kv-table">
+    <tbody><tr><td>Technik</td><td>Chroma-Keying / Luma-Keying in DaVinci Resolve oder Premiere Pro</td></tr>
+    <tr><td>GS-Anforderung</td><td>Gleichmäßige Ausleuchtung; mind. 1,5 m Abstand Moderator – Greenscreen</td></tr>
+    <tr><td>Einstellung</td><td>Halbtotale (American Shot): Kopf bis Oberschenkel sichtbar</td></tr>
+    <tr><td>Grafik-Einblendung</td><td>After Effects / Resolve Fusion: positionierte Grafik-Ebenen</td></tr>
+    <tr><td>Relevanz</td><td>Frames #1 (Einleitung) und #6 (Abschluss / Outro)</td></tr>
+  </tbody></table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 2 – SDR vs HDR ══ -->
+<div class="section visible" id="s2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-titles">
+      <h2>SDR vs. HDR – Farbräume im Vergleich</h2>
+      <div class="sub">Storyboard-Frame #2 · Rec. 709 vs. Rec. 2020</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="split-illo" style="position:relative;">
+      <div class="split-side">
+        <div class="sdr-sky" style="flex:1;position:relative;">
+          <div class="sdr-sun"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;">
+            <div class="sdr-reflections" style="position:static;padding:8px 10px;">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="sdr-water"></div>
+        <div class="split-label">SDR · Rec. 709</div>
+      </div>
+      <div class="split-side">
+        <div class="hdr-sky" style="flex:1;position:relative;">
+          <div class="hdr-sun"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;">
+            <div class="hdr-reflections" style="position:static;padding:8px 8px;">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="hdr-water"></div>
+        <div class="split-label" style="background:rgba(100,30,0,0.7);">HDR · Rec. 2020</div>
+      </div>
+      <div class="split-divider"></div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 2 – Split-Screen: Links SDR (gedämpfte Farben), rechts HDR (erweiterter Farbraum)</div>
+
+  <h3 class="h2">Funktionsweise: Farbräume und Gamuts</h3>
+  <p class="body-text">Der <strong>Farbraum</strong> (Gamut) definiert, welche Farben ein Display darstellen kann. Der SDR-Standard <strong>Rec. 709</strong> deckt ca. 35,9 % des sichtbaren CIE-Farbraums ab. Der HDR-Standard <strong>Rec. 2020</strong> erweitert dies auf ca. 75,8 % – fast doppelt so viele darstellbare Farben.</p>
+
+  <div class="info-box warn">
+    <span class="icon">⚠</span>
+    <p>Zuschauer ohne HDR-Gerät sehen Rec.-2020-Farben tone-gemappt auf Rec. 709. Die Illustration muss so gestaltet sein, dass der Unterschied auch auf SDR-Displays erkennbar bleibt – z.B. durch Kontrast- statt nur Sättigungsunterschiede.</p>
+  </div>
+
+  <table class="kv-table">
+    <tbody><tr><td>SDR-Standard</td><td>Rec. 709 · 8-Bit · max. 100 nits · ca. 16,7 Mio. Farben</td></tr>
+    <tr><td>HDR-Standard</td><td>Rec. 2020 · 10-Bit+ · bis 10.000 nits · ca. 1,07 Mrd. Farben</td></tr>
+    <tr><td>Farbraum-Abdeckung</td><td>Rec. 709: ~35,9 % CIE · Rec. 2020: ~75,8 % CIE</td></tr>
+    <tr><td>Sichtbarer Unterschied</td><td>Besonders bei gesättigtem Rot, Grün und tiefen Blautönen</td></tr>
+    <tr><td>Technische Umsetzung</td><td>Split-Screen im Schnittprogramm; links: SDR-LUT, rechts: HDR-Grade</td></tr>
+    <tr><td>Relevanz</td><td>Frame #2 – direkter Vergleich als zentrales Erklärungsmittel</td></tr>
+  </tbody></table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 3 – SONNENUNTERGANG ══ -->
+<div class="section visible" id="s3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-titles">
+      <h2>Sonnenuntergang – Dynamikumfang &amp; Spitzlichter</h2>
+      <div class="sub">Storyboard-Frame #3 · Nits, Kontrast &amp; Highlights</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="split-illo" style="position:relative;">
+      <div class="split-side">
+        <div class="sdr-sky" style="flex:1;position:relative;">
+          <div class="sdr-sun"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;">
+            <div class="sdr-reflections" style="position:static;padding:8px 10px;">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="sdr-water"></div>
+        <div class="split-label">SDR · max. 100 nits</div>
+      </div>
+      <div class="split-side">
+        <div class="hdr-sky" style="flex:1;position:relative;">
+          <div class="hdr-sun"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;">
+            <div class="hdr-reflections" style="position:static;padding:8px 8px;">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="hdr-water"></div>
+        <div class="split-label" style="background:rgba(100,30,0,0.7);">HDR · bis 1000+ nits</div>
+      </div>
+      <div class="split-divider"></div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 3 – Sonnenuntergang-Demo: SDR (links) vs. HDR (rechts) – Highlights und Schattendetail</div>
+
+  <h3 class="h2">Funktionsweise: Dynamikumfang und Helligkeit</h3>
+  <p class="body-text">Der <strong>Dynamikumfang</strong> beschreibt den Helligkeitsbereich zwischen dem dunkelsten Schwarz und dem hellsten Weiß. Die Einheit ist <strong>Nits (cd/m²)</strong>. Ein SDR-Display leistet maximal 100 nits; HDR-Panels erreichen 400–4.000 nits in der Spitze, während dunkle Bildbereiche gleichzeitig tief schwarz bleiben.</p>
+
+  <table class="kv-table">
+    <tbody><tr><td>SDR Helligkeit</td><td>Max. 100 nits (Weißpunkt) · Dynamik: ca. 6 Blenden</td></tr>
+    <tr><td>HDR Helligkeit</td><td>400–10.000 nits je nach Standard · Dynamik: 14–20 Blenden</td></tr>
+    <tr><td>Kontrastverhältnis</td><td>SDR: ~1.000:1 · HDR OLED: bis ∞:1 (echter Pixel-Off)</td></tr>
+    <tr><td>Nits-Skala</td><td>Sternenhimmel: 0,001 nits · Bewölkt: 1 nit · Sonne direkt: mehrere Mrd. nits</td></tr>
+    <tr><td>Tone Mapping</td><td>HDR→SDR: Highlights werden komprimiert, Schattenwerte skaliert</td></tr>
+    <tr><td>Relevanz</td><td>Frame #3 – emotionale Demonstration anhand eines Naturbilds</td></tr>
+  </tbody></table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 4 – BIT DEPTH ══ -->
+<div class="section visible" id="s4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-titles">
+      <h2>8-Bit vs. 10-Bit – Farbtiefe &amp; Color Banding</h2>
+      <div class="sub">Storyboard-Frame #4 · Stufensprünge vs. weiche Verläufe</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="bit-illo">
+      <div class="bit-panel">
+        <div class="bit-title">8-Bit &nbsp;(256 Stufen)</div>
+        <div class="bit-grad">
+          <div class="bit8-steps" id="bit8"><div style="background: rgb(20, 30, 180);"></div><div style="background: rgb(49, 40, 188);"></div><div style="background: rgb(77, 50, 196);"></div><div style="background: rgb(106, 60, 204);"></div><div style="background: rgb(134, 70, 211);"></div><div style="background: rgb(163, 80, 219);"></div><div style="background: rgb(191, 90, 227);"></div><div style="background: rgb(220, 100, 235);"></div></div>
+          <svg class="staircase" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polyline points="0,100 12.5,100 12.5,87.5 25,87.5 25,75 37.5,75 37.5,62.5 50,62.5 50,50 62.5,50 62.5,37.5 75,37.5 75,25 87.5,25 87.5,12.5 100,12.5" fill="none" stroke="#ff3311" stroke-width="2.5"></polyline>
+          </svg>
+        </div>
+        <div class="bit-annot bad">← sichtbare Farbsprünge (Banding)</div>
+      </div>
+      <div class="bit-panel">
+        <div class="bit-title">10-Bit &nbsp;(1024 Stufen)</div>
+        <div class="bit-grad">
+          <div class="bit10-grad"></div>
+          <svg class="staircase" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line x1="0" y1="100" x2="100" y2="0" stroke="#2255ff" stroke-width="2.5"></line>
+          </svg>
+        </div>
+        <div class="bit-annot good">✓ weicher, stufenloser Übergang</div>
+      </div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 4 – Links: 8-Bit-Treppe mit Banding. Rechts: 10-Bit-Rampe mit stufenlosem Verlauf</div>
+
+  <h3 class="h2">Funktionsweise: Bit-Tiefe und Quantisierung</h3>
+  <p class="body-text">Die <strong>Bit-Tiefe</strong> bestimmt, wie viele Abstufungen pro Farbkanal (Rot, Grün, Blau) möglich sind. Bei <strong>8 Bit</strong> gibt es 256 Stufen pro Kanal (ca. 16,7 Mio. Farben). Bei <strong>10 Bit</strong> sind es 1.024 Stufen (ca. 1,07 Mrd. Farben). In sanften Farbverläufen werden die zu groben 8-Bit-Abstufungen als <strong>Color Banding</strong> sichtbar.</p>
+
+  <div class="info-box blue">
+    <span class="icon">💡</span>
+    <p><strong>Metapher im Video:</strong> Die 8-Bit-Treppe zeigt grobe Sprünge wie eine Wendeltreppe mit zu wenig Stufen. Die 10-Bit-Rampe ist eine glatte schiefe Ebene – der Übergang ist flüssig und natürlich.</p>
+  </div>
+
+  <table class="kv-table">
+    <tbody><tr><td>8-Bit</td><td>256 Stufen/Kanal · 16,7 Mio. Farben · Color Banding in Verläufen sichtbar</td></tr>
+    <tr><td>10-Bit</td><td>1.024 Stufen/Kanal · 1,07 Mrd. Farben · weiche, stufenlose Übergänge</td></tr>
+    <tr><td>Color Banding</td><td>Sichtbare Farbstreifen in Gradients; besonders bei komprimiertem Material</td></tr>
+    <tr><td>HDR-Voraussetzung</td><td>Echtes HDR erfordert mindestens 10 Bit (HDR10, Dolby Vision, HLG)</td></tr>
+    <tr><td>Dithering</td><td>Technik zur Reduktion von Banding bei 8-Bit-Ausgabe durch Rauschen</td></tr>
+    <tr><td>Relevanz</td><td>Frame #4 – Animation als Kernbotschaft der Szene</td></tr>
+  </tbody></table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 5 – LOCAL DIMMING ══ -->
+<div class="section visible" id="s5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-titles">
+      <h2>Local Dimming – OLED vs. Mini-LED</h2>
+      <div class="sub">Storyboard-Frame #5 · Hintergrundbeleuchtung im Vergleich</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="led-illo">
+      <div class="led-panel">
+        <div class="led-title">OLED – Pixel selbstleuchtend</div>
+        <div class="oled-screen" id="oledGrid"><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.789633;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.793034;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.72039;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.893181;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.868992;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.816027;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.876883;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.743528;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.982924;"></div><div class="oled-px"></div><div class="oled-px on" style="opacity: 0.978789;"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div><div class="oled-px"></div></div>
+        <div class="led-annot good">✓ Pixel AUS = echtes Schwarz (0 nits)</div>
+      </div>
+      <div class="led-panel">
+        <div class="led-title">Mini-LED – Local Dimming Zonen</div>
+        <div class="miniled-screen" id="miniGrid"><div class="zone">Z1</div><div class="zone mid">Z2</div><div class="zone">Z3</div><div class="zone">Z4</div><div class="zone">Z5</div><div class="zone mid">Z6</div><div class="zone bright">Z7</div><div class="zone bright">Z8</div><div class="zone bright">Z9</div><div class="zone mid">Z10</div><div class="zone">Z11</div><div class="zone bright">Z12</div><div class="zone bright">Z13</div><div class="zone bright">Z14</div><div class="zone">Z15</div><div class="zone">Z16</div><div class="zone mid">Z17</div><div class="zone mid">Z18</div><div class="zone">Z19</div><div class="zone">Z20</div></div>
+        <div class="led-annot bad">⚠ Lichthöfe möglich (Blooming)</div>
+      </div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 5 – Links: OLED mit echtem Pixel-Off. Rechts: Mini-LED Local-Dimming-Zonen</div>
+
+  <h3 class="h2">Funktionsweise: Display-Technologien für HDR</h3>
+  <p class="body-text"><strong>OLED</strong>: Jeder Pixel leuchtet selbst und kann individuell abgeschaltet werden – perfektes Schwarz (0 nits), theoretisch unendliches Kontrastverhältnis. Nachteil: begrenzte Spitzenhelligkeit (ca. 400–1.500 nits).</p>
+  <p class="body-text"><strong>Mini-LED / LCD mit Local Dimming</strong>: Tausende winzige LEDs werden in Zonen gruppiert und einzeln gedimmt. Vorteil: sehr hohe Spitzenhelligkeit (bis 4.000+ nits). Nachteil: Lichthöfe (<strong>Blooming</strong>) an Kanten zwischen hellen und dunklen Zonen.</p>
+
+  <div class="info-box blue">
+    <span class="icon">🔦</span>
+    <p><strong>Metapher im Video (Taschenlampen-Analogie):</strong> Statt einer großen Taschenlampe hinter dem gesamten Bild leuchten beim Local Dimming hunderte kleine, einzeln schaltbare Mini-LEDs gezielt nur dort, wo das Bild hell sein soll.</p>
+  </div>
+
+  <table class="kv-table">
+    <tbody><tr><td>OLED – Schwarz</td><td>Echter Pixel-Off: 0,0005 nits · Kontrast: theoretisch unendlich</td></tr>
+    <tr><td>OLED – Helligkeit</td><td>Ca. 400–1.500 nits Spitze · gut für dunkle Räume</td></tr>
+    <tr><td>Mini-LED – Schwarz</td><td>Abhängig von Zonenanzahl · typisch 0,005–0,02 nits</td></tr>
+    <tr><td>Mini-LED – Helligkeit</td><td>1.000–4.000+ nits · ideal für helle Räume &amp; Tageslicht</td></tr>
+    <tr><td>Blooming</td><td>Lichthöfe um helle Objekte durch begrenzte Zonenanzahl</td></tr>
+    <tr><td>Relevanz</td><td>Frame #5 – Taschenlampen-Analogie erklärt Local-Dimming-Prinzip</td></tr>
+  </tbody></table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 6 – OUTRO ══ -->
+<div class="section visible" id="s6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-titles">
+      <h2>Halbtotale – Outro &amp; Compositing</h2>
+      <div class="sub">Storyboard-Frame #6 · Abschluss und Überblendung</div>
+    </div>
+  </div>
+
+  <div class="illo-wrap">
+    <div class="gs-illo">
+      <div class="gs-screen">
+        <span class="gs-label">GREENSCREEN (Chroma-Key)</span>
+      </div>
+      <div class="gs-cards">
+        <div class="gs-card" style="opacity:0.5;text-decoration:line-through;">Rec. 2020 Farbraum</div>
+        <div class="gs-card" style="opacity:0.25;text-decoration:line-through;">Nits-Skala</div>
+        <div class="gs-card" style="opacity:0.05;">HDR10 / Dolby Vision</div>
+      </div>
+      <div class="gs-card-r">
+        <div class="gs-card r" style="opacity:0.5;text-decoration:line-through;">Format-Vergleich</div>
+        <div class="gs-card r" style="opacity:0.25;text-decoration:line-through;">HDR10+</div>
+        <div class="gs-card r" style="opacity:0.05;">Dolby Vision</div>
+      </div>
+      <div class="gs-mod">
+        <div class="gs-head"></div>
+        <div class="gs-body"></div>
+      </div>
+      <div class="gs-cam-bar">
+        <div class="cam-icon">KAMERA</div>
+        <span>→ Cross-Dissolve zum nächsten Segment</span>
+      </div>
+    </div>
+  </div>
+  <div class="illo-caption">Abb. 6 – Outro: Grafiken werden ausgeblendet, Überblendung zum nächsten Segment</div>
+
+  <h3 class="h2">Funktionsweise: Compositing &amp; Überblendung</h3>
+  <p class="body-text">Die Abschlusseinstellung kehrt zur <strong>Halbtotalen</strong> zurück und spiegelt Frame #1. Die virtuellen Grafiken werden sanft ausgeblendet (Opacity-Animation, ca. 0,5–1 s) und der Hintergrund wechselt zu einem neutralen Studio-Look. Die Überblendung (<strong>Cross-Dissolve</strong>) erfolgt mit ca. 12–24 Frames.</p>
+
+  <table class="kv-table">
+    <tbody><tr><td>Einstellung</td><td>Halbtotale – identisch zu Frame #1 (Symmetrie)</td></tr>
+    <tr><td>GS-Keying</td><td>Chroma-Key wie in Frame #1 – gleiche Kamera- und Lichtposition</td></tr>
+    <tr><td>Grafik-Ausblendung</td><td>Opacity 100 % → 0 % über 0,5 s mit Ease-Out-Kurve</td></tr>
+    <tr><td>Überblendung</td><td>Cross-Dissolve, 12–24 Frames (0,5–1 s bei 25 fps)</td></tr>
+    <tr><td>Audio</td><td>Musik-Fadeout parallel zur visuellen Überblendung</td></tr>
+    <tr><td>Puffer beim Dreh</td><td>Mind. 3 s nach letztem Satz weiterlaufen lassen (Schnittpuffer)</td></tr>
+    <tr><td>Relevanz</td><td>Frame #6 – runder Abschluss der Szene „Die Welt der Farben"</td></tr>
+  </tbody></table>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>Ergänzungsdokument zu <strong>Aufgabenblatt 2 – Medienproduktion 2</strong></p>
+  <p style="margin-top:0.4rem;">Modul 11B0033 · Audio- und Videotechnik · <strong>Hochschule Osnabrück</strong> · Sommersemester 2026</p>
+</footer>
+
+<script>
+// ── 8-Bit Steps füllen ──
+const bit8 = document.getElementById('bit8');
+const steps = 8;
+for (let i = 0; i < steps; i++) {
+  const t = i / (steps - 1);
+  const r = Math.round(20 + t * 200);
+  const g = Math.round(30 + t * 70);
+  const b = Math.round(180 + t * 55);
+  const d = document.createElement('div');
+  d.style.background = `rgb(${r},${g},${b})`;
+  bit8.appendChild(d);
+}
+
+// ── OLED Pixel-Grid ──
+const oled = document.getElementById('oledGrid');
+const bright = new Set([1,3,5, 7,9,11,13, 15,17,19]);
+for (let i = 0; i < 28; i++) {
+  const px = document.createElement('div');
+  px.className = 'oled-px' + (bright.has(i) ? ' on' : '');
+  oled.appendChild(px);
+}
+
+// ── Mini-LED Zonen ──
+const mini = document.getElementById('miniGrid');
+const brightZ = new Set([6,7,8, 11,12,13]);
+const midZ    = new Set([1,5,9, 16,17]);
+for (let i = 0; i < 20; i++) {
+  const z = document.createElement('div');
+  z.className = 'zone' + (brightZ.has(i) ? ' bright' : midZ.has(i) ? ' mid' : '');
+  z.textContent = `Z${i+1}`;
+  mini.appendChild(z);
+}
+
+// ── Intersection Observer für Scroll-Animationen ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// ── Nav active state ──
+const navLinks = document.querySelectorAll('.nav a');
+const sections = document.querySelectorAll('.section[id]');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+
+// ── OLED Pixel animation ──
+setInterval(() => {
+  document.querySelectorAll('.oled-px.on').forEach(px => {
+    px.style.opacity = 0.7 + Math.random() * 0.3;
+  });
+}, 1500);
+</script>
+
+
+</body></html>
